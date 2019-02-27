@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const UserSChema = new Schema({
+const UserSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -16,8 +16,7 @@ const UserSChema = new Schema({
         required: true
     },
     avatar: {
-        type: String,
-        required: true
+        type: String
     },
     date: {
         type: Date,
