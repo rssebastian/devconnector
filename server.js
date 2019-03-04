@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const passport = require('passport');
 
 const users = require('./routes/api/users');
@@ -17,6 +17,7 @@ const app = express();
 
 // Body Parser already included in Express
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // DB Config
 const db = require('./config/keys').mongoURI;

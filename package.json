@@ -4,8 +4,11 @@
   "description": "From Udemy",
   "main": "server.js",
   "scripts": {
+    "client-install": "npm i --prefix client",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Ryan Sebastian",
   "license": "MIT",
