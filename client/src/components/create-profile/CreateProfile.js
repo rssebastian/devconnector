@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
+import { createProfile } from '../../actions/profileActions';
 
 
 class CreateProfile extends Component {
@@ -29,6 +31,12 @@ class CreateProfile extends Component {
         }
     }
 
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.errors) {
+            this.setState({ errors: nextProps.errors });
+        }
+    }
+
     onChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
@@ -37,7 +45,24 @@ class CreateProfile extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        console.log('submit');
+        
+        const profileData = {
+            handle: this.state.handle,
+            company: this.state.company,
+            website: this.state.website,
+            location: this.state.location,
+            status: this.state.status,
+            skills: this.state.skills,
+            githubusername: this.state.githubusername,
+            bio: this.state.bio,
+            twitter: this.state.twitter,
+            facebook: this.state.facebook,
+            linkedin: this.state.linkedin,
+            youtube: this.state.youtube,
+            instagram: this.state.instagram
+        }
+
+        this.props.createProfile(profileData, this.props.history);
     }
 
     render() {
@@ -183,6 +208,7 @@ class CreateProfile extends Component {
 
                                 <div className="mb-3">
                                     <button 
+                                        type="button"
                                         onClick={() => {
                                             this.setState(prevState => ({
                                                 displaySocialInputs: !prevState.displaySocialInputs
@@ -215,4 +241,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(mapStateToProps, { createProfile })(withRouter(CreateProfile));
